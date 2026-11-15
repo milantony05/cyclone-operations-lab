@@ -6,6 +6,7 @@ __pycache__/
 .build/
 *.inspect.ndjson
 *.zip
+dist/
 Task2/prototype/index/
 .ipynb_checkpoints/
 notebooks/.executed/
