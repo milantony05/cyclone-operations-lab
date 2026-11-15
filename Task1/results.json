@@ -1,0 +1,9 @@
+{
+  "shutdown_events": 77,
+  "downtime_hours": 5156.416666666667,
+  "unknown_hours": 204.66666666666666,
+  "clusters": 6,
+  "anomaly_events": 926,
+  "forecast_train_end": "2019-02-28 17:00:00",
+  "forecast_test_start": "2019-11-18 14:40:00"
+}

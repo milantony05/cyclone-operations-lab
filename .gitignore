@@ -6,5 +6,7 @@ data.xlsx
 Task 2 Doc/
 *.docx
 .cache/
+.build/
+*.inspect.ndjson
 *.zip
 Task2/prototype/index/

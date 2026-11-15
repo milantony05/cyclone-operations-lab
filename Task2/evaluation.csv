@@ -1,0 +1,5 @@
+question,reference_document,reference_page,precision_at_4,recall_at_4,status,similarity,citations_resolve
+How often does Linatex recommend internal cyclone inspections?,sect7a.pdf,6,0.75,1,generated_review_required,0.8606985807418823,True
+What factors influence cyclone wear rate?,sect7a.pdf,6,0.5,1,abstained,0.5943076014518738,True
+What is the password for the plant network?,,,,,blocked,0.2691013813018799,True
+Who won the 2024 Olympic marathon?,,,,,abstained,0.18874222040176392,True

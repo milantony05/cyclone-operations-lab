@@ -1,0 +1,74 @@
+[
+  {
+    "question": "How often does Linatex recommend internal cyclone inspections?",
+    "answer": "every two months [sect7a.pdf, p. 6; sect7a.pdf, p. 6]",
+    "sources": [
+      {
+        "id": "sect7a.pdf:6:3",
+        "document": "sect7a.pdf",
+        "page": 6,
+        "text": "wear. Linatex recommend internal inspections every two months, until a good measure of the cyclone wear rate can be established.",
+        "fusion_score": 0.03278688524590164
+      },
+      {
+        "id": "sect7a.pdf:6:2",
+        "document": "sect7a.pdf",
+        "page": 6,
+        "text": "components of a Linaex cyclone can be re-lined by local Linatex applicators, providing the component has been replaced before the steel shell has worn through. To prevent wear through requires regular internal inspection. Routine Inspection Frequency The frequency of internal inspection of a cyclone varies with the wear rate experienced in the duty. The wear rate in a duty depends on many factors of the feed, including \u2013 \u2022 Mineral Characteristics \u2013 hard ore means higher wear, \u2022 Particle Size \u2013 large particles give higher wear, \u2022 Particle Shape and Sharpness \u2013 flat, sharp particles mean higher wear, \u2022 Feed Pressure \u2013 higher pressure causes higher wear (square law), \u2022 Feed slurry % solids \u2013 high % solids means higher wear. Linatex recommend internal inspections every two months, until a good measure of the cyclone wear rate can be established.",
+        "fusion_score": 0.03225806451612903
+      }
+    ],
+    "status": "generated_review_required",
+    "similarity": 0.8606985807418823,
+    "limitation": "Citations identify retrieved evidence; lexical support does not prove factual entailment."
+  },
+  {
+    "question": "What factors influence cyclone wear rate?",
+    "answer": "Insufficient evidence for a reliable generated answer. Review the retrieved excerpts.",
+    "sources": [
+      {
+        "id": "D13.pdf:24:0",
+        "document": "D13.pdf",
+        "page": 24,
+        "text": "5. CONCLUSION A prominent problem in calculating the efficiency of cyclone is the effect of flow characters in cyclone. In big cyclones the flow is turbulent and friction factors assumed give good results. This is not true for small cyclones. The flow in small cyclones can be laminar or even transitional. In such case the operational conditions, like velocity, temperature, pressure, viscosity and cyclone diameter, may be of significant importance and their effect changes from cyclone to cyclone. In laminar flow, operating parameters influence cyclone efficiency more than turbulent case. This makes the prediction of efficiency and pressure drop very difficult especially in small cyclone. Most of the models depend on empirical or semi-empirical equations. The models calculate efficiency and predict the cutoff size which corresponds to 50% efficiency. According to Wang et al. cyclone performance is function of geometry and operating parameters of cyclone, as well as particle size",
+        "fusion_score": 0.032018442622950824
+      },
+      {
+        "id": "sect7a.pdf:6:3",
+        "document": "sect7a.pdf",
+        "page": 6,
+        "text": "wear. Linatex recommend internal inspections every two months, until a good measure of the cyclone wear rate can be established.",
+        "fusion_score": 0.0315136476426799
+      },
+      {
+        "id": "sect7a.pdf:6:2",
+        "document": "sect7a.pdf",
+        "page": 6,
+        "text": "components of a Linaex cyclone can be re-lined by local Linatex applicators, providing the component has been replaced before the steel shell has worn through. To prevent wear through requires regular internal inspection. Routine Inspection Frequency The frequency of internal inspection of a cyclone varies with the wear rate experienced in the duty. The wear rate in a duty depends on many factors of the feed, including \u2013 \u2022 Mineral Characteristics \u2013 hard ore means higher wear, \u2022 Particle Size \u2013 large particles give higher wear, \u2022 Particle Shape and Sharpness \u2013 flat, sharp particles mean higher wear, \u2022 Feed Pressure \u2013 higher pressure causes higher wear (square law), \u2022 Feed slurry % solids \u2013 high % solids means higher wear. Linatex recommend internal inspections every two months, until a good measure of the cyclone wear rate can be established.",
+        "fusion_score": 0.030679156908665108
+      },
+      {
+        "id": "B_12a.pdf:2:0",
+        "document": "B_12a.pdf",
+        "page": 2,
+        "text": "Review DRAFT CAM TECHNICAL GUIDANCE DOCUMENT B.12 CYCLONES 4/02 B-109 Opacity. As is the case for all dry PM controls, opacity is an indicator of control device performance. An increase in opacity or visible emissions generally corresponds to a decrease in cyclone performance. Inlet velocity or Inlet gas flow rate. Among other factors, cyclone control efficiency is a function of inlet velocity. As velocity increases, the inertial forces acting on particles in the gas stream increase, as does the likelihood that particles will impact the cyclone wall and be transported to the collection hopper. However, as velocity increases, turbulence forms in the gas stream and disrupts gas flow. Beyond a critical velocity, control efficiency decreases with increasing velocity. Below this critical velocity, decreases in velocity result in reductions in control efficiency. Pressure differential. Because pressure differential across a cyclone is primarily a function of velocity, it can be used as",
+        "fusion_score": 0.030621785881252923
+      }
+    ],
+    "status": "abstained",
+    "similarity": 0.5943076014518738
+  },
+  {
+    "question": "What is the password for the plant network?",
+    "answer": "I cannot help bypass safety controls or disclose credentials.",
+    "sources": [],
+    "status": "blocked"
+  },
+  {
+    "question": "Who won the 2024 Olympic marathon?",
+    "answer": "The supplied documents do not provide enough relevant evidence to answer.",
+    "sources": [],
+    "status": "abstained",
+    "similarity": 0.18874222040176392
+  }
+]

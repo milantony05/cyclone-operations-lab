@@ -1,0 +1,63 @@
+{
+  "raw_rows": 377719,
+  "duplicate_timestamps": 0,
+  "missing_timestamps": 861,
+  "markers": {
+    "Cyclone_Inlet_Gas_Temp": {
+      "Not Connect": 723,
+      "I/O Timeout": 470,
+      "Configure": 108,
+      "Scan Timeout": 17,
+      "Comm Fail": 2
+    },
+    "Cyclone_Material_Temp": {
+      "Not Connect": 723,
+      "I/O Timeout": 470,
+      "Unit Down": 271,
+      "Configure": 108,
+      "Scan Timeout": 17,
+      "Comm Fail": 2
+    },
+    "Cyclone_Outlet_Gas_draft": {
+      "Not Connect": 723,
+      "I/O Timeout": 470,
+      "Configure": 108,
+      "Scan Timeout": 17,
+      "Comm Fail": 2,
+      "Unit Down": 1
+    },
+    "Cyclone_cone_draft": {
+      "Not Connect": 723,
+      "I/O Timeout": 470,
+      "Configure": 108,
+      "Scan Timeout": 17,
+      "Comm Fail": 2
+    },
+    "Cyclone_Gas_Outlet_Temp": {
+      "Not Connect": 723,
+      "I/O Timeout": 470,
+      "Configure": 108,
+      "Scan Timeout": 17,
+      "Comm Fail": 2,
+      "Unit Down": 1
+    },
+    "Cyclone_Inlet_Draft": {
+      "Not Connect": 723,
+      "I/O Timeout": 470,
+      "Configure": 108,
+      "Scan Timeout": 17,
+      "Unit Down": 2,
+      "Comm Fail": 2
+    }
+  },
+  "missing_by_sensor": {
+    "Cyclone_Inlet_Gas_Temp": 2181,
+    "Cyclone_Material_Temp": 2452,
+    "Cyclone_Outlet_Gas_draft": 2182,
+    "Cyclone_cone_draft": 2181,
+    "Cyclone_Gas_Outlet_Temp": 2182,
+    "Cyclone_Inlet_Draft": 2183
+  },
+  "start": "2017-01-01 00:00:00",
+  "end": "2020-08-07 12:15:00"
+}

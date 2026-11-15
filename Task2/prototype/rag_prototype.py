@@ -90,7 +90,9 @@ class RAG:
         support=set(tokenize(context)); tokens=set(tokenize(answer))
         grounded=len(tokens & support)/max(len(tokens),1)
         if grounded<.7 or len(tokens)<3: return dict(answer='Insufficient evidence for a reliable generated answer. Review the retrieved excerpts.',sources=records,status='abstained',similarity=similarity)
-        return dict(answer=answer,sources=records[:2],status='generated_review_required',similarity=similarity,
+        answer=re.sub(r'\[\d+\]','',answer).strip()
+        citations='; '.join(f"{r['document']}, p. {r['page']}" for r in records[:2])
+        return dict(answer=answer+' ['+citations+']',sources=records[:2],status='generated_review_required',similarity=similarity,
                     limitation='Citations identify retrieved evidence; lexical support does not prove factual entailment.')
 
 
