@@ -32,7 +32,7 @@ The original workbook, assignment brief, and eleven PDFs are in `docs/`. Derived
 
 ## Hosted dashboard
 
-The Streamlit Community Cloud entry point is `dashboard/app.py` on the `main` branch. `dashboard/requirements.txt` installs only the dashboard's display dependencies; the root `requirements.txt` remains the full local analysis environment. The hosted Document Q&A tab shows a recorded cited answer because the local FAISS index and language models are excluded from Git. To ask new questions, build the index locally and run `python dashboard/run_dashboard.py`.
+The [live dashboard](https://cyclone-operations-lab.streamlit.app/) runs on Streamlit Community Cloud from `dashboard/app.py` on the `main` branch. `dashboard/requirements.txt` installs only the dashboard's display dependencies; the root `requirements.txt` remains the full local analysis environment. The hosted Document Q&A tab shows a recorded cited answer because the local FAISS index and language models are excluded from Git. To ask new questions, build the index locally and run `python -m streamlit run dashboard/app.py` from the repository root.
 
 ## Set up locally
 
@@ -45,10 +45,10 @@ python -m pip install -r requirements.txt
 python 1_sensor_analysis/task1_analysis.py
 python 1_sensor_analysis/enrich_report.py
 python 2_document_qa/prototype/rag_prototype.py --rebuild
-python dashboard/run_dashboard.py
+python -m streamlit run dashboard/app.py
 ```
 
-On macOS or Linux, create the environment with `python3.12 -m venv .venv` and activate it with `source .venv/bin/activate`. The first index build downloads the open models `sentence-transformers/all-MiniLM-L6-v2` and `google/flan-t5-small`; later runs reuse the local cache. The dashboard launcher starts Streamlit from `dashboard/`, so `dashboard/.streamlit/config.toml` supplies its theme.
+On macOS or Linux, create the environment with `python3.12 -m venv .venv` and activate it with `source .venv/bin/activate`. The first index build downloads the open models `sentence-transformers/all-MiniLM-L6-v2` and `google/flan-t5-small`; later runs reuse the local cache. Streamlit reads `dashboard/.streamlit/config.toml` for the dashboard theme.
 
 Open the notebooks from the repository root with:
 
