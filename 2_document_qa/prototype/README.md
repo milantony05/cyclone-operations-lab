@@ -3,8 +3,8 @@
 From the repository root, install `requirements.txt`, then run:
 
 ```sh
-python document_qa/prototype/rag_prototype.py --docs docs/source-pdfs --rebuild
-python document_qa/prototype/rag_prototype.py --question "What inspections are required before startup?"
+python 2_document_qa/prototype/rag_prototype.py --docs docs/source-pdfs --rebuild
+python 2_document_qa/prototype/rag_prototype.py --question "What inspections are required before startup?"
 ```
 
 The first run downloads `sentence-transformers/all-MiniLM-L6-v2` and `google/flan-t5-small` from Hugging Face. No paid API or API key is required. Model files are cached by Hugging Face. Allow sufficient disk space for PyTorch and the models. CPU execution is supported.

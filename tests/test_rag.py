@@ -1,4 +1,4 @@
-from document_qa.prototype.rag_prototype import chunks, blocked
+from importlib import import_module; chunks = import_module("2_document_qa.prototype.rag_prototype").chunks; blocked = import_module("2_document_qa.prototype.rag_prototype").blocked
 
 
 def test_chunks_preserve_overlap():

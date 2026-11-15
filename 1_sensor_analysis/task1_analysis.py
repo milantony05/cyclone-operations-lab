@@ -45,7 +45,7 @@ def prepare(raw):
 
 
 def main():
-    parser=argparse.ArgumentParser(); parser.add_argument('--data',default='docs/data.xlsx'); parser.add_argument('--output',default='sensor_analysis')
+    parser=argparse.ArgumentParser(); parser.add_argument('--data',default='docs/data.xlsx'); parser.add_argument('--output',default='1_sensor_analysis')
     args=parser.parse_args(); out=Path(args.output); out.mkdir(exist_ok=True,parents=True)
     data, quality=prepare(pd.read_excel(args.data))
     (out/'data_quality.json').write_text(json.dumps(quality,indent=2),encoding='utf-8')

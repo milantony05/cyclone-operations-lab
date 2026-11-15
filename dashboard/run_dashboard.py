@@ -3,5 +3,6 @@ from pathlib import Path
 import subprocess
 import sys
 
-dashboard = Path(__file__).resolve().parents[1] / "dashboard"
+dashboard = Path(__file__).resolve().parent
 raise SystemExit(subprocess.call([sys.executable, "-m", "streamlit", "run", "app.py"], cwd=dashboard))
+

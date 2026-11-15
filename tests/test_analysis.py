@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from sensor_analysis.task1_analysis import periods, lag_features
+from importlib import import_module; periods = import_module("1_sensor_analysis.task1_analysis").periods; lag_features = import_module("1_sensor_analysis.task1_analysis").lag_features
 
 
 def test_event_duration_includes_last_sample():

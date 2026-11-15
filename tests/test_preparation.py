@@ -1,5 +1,5 @@
 import pandas as pd
-from sensor_analysis.task1_analysis import prepare, periods
+from importlib import import_module; prepare = import_module("1_sensor_analysis.task1_analysis").prepare; periods = import_module("1_sensor_analysis.task1_analysis").periods
 
 
 def test_missing_grid_and_duplicate_median():
