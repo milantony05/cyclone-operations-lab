@@ -1,8 +1,8 @@
 # Machine data analysis
 
-From the repository root, run `python Task1/task1_analysis.py --data docs/source-data/data.xlsx`.
+From the repository root, run `python sensor_analysis/task1_analysis.py --data docs/data.xlsx`.
 Install the root requirements first. The run produces all CSVs and plots locally.
-Run `python -m Task1.enrich_report` afterward to reproduce the detailed before/during anomaly comparisons and readable state names in the submitted report.
+Run `python -m sensor_analysis.enrich_report` afterward to reproduce the detailed before/during anomaly comparisons and readable state names in the submitted report.
 
 ## Methods and interpretation
 
@@ -35,3 +35,4 @@ Forecasting uses chronological 60/20/20 splits and 12 direct gradient-boosting r
 5. At one hour, boosting achieves MAE 10.90 and RMSE 19.48 versus persistence MAE 12.48 and RMSE 22.68. Evaluate separately around shutdown transitions before deployment. Sensor units are not explicitly documented in the supplied brief; errors are reported in native temperature units.
 
 Run `python -m pytest -q` for deterministic core tests. Forecast origins overlap, so errors are correlated and the point metrics are not confidence intervals.
+

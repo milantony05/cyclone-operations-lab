@@ -9,7 +9,7 @@ import streamlit as st
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-TASK = ROOT / 'Task1'
+TASK = ROOT / 'sensor_analysis'
 
 st.set_page_config(page_title='Cyclone Operations Lab', page_icon='🌀', layout='wide')
 st.markdown('''<style>
@@ -86,9 +86,9 @@ def main():
         st.caption('First run the indexing command in the README. The local FLAN-T5 model may take time on CPU.')
         question=st.text_input('Question',value='How often does Linatex recommend internal cyclone inspections?')
         if st.button('Search and answer',type='primary'):
-            from Task2.prototype.rag_prototype import RAG
-            index=ROOT/'Task2/prototype/index'
-            if not (index/'vectors.faiss').exists():st.error('Index missing. Run: python Task2/prototype/rag_prototype.py --rebuild')
+            from document_qa.prototype.rag_prototype import RAG
+            index=ROOT/'document_qa/prototype/index'
+            if not (index/'vectors.faiss').exists():st.error('Index missing. Run: python document_qa/prototype/rag_prototype.py --rebuild')
             else:
                 with st.spinner('Retrieving evidence and generating a cited answer...'):
                     response=RAG(index).answer(question)
@@ -99,7 +99,8 @@ def main():
     with pages[6]:
         st.markdown((TASK/'README.md').read_text(encoding='utf-8'))
         st.markdown('### RAG design')
-        st.markdown((ROOT/'Task2/notes.md').read_text(encoding='utf-8'))
+        st.markdown((ROOT/'document_qa/notes.md').read_text(encoding='utf-8'))
 
 if __name__=='__main__':main()
+
 

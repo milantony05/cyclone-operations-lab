@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from Task1.task1_analysis import periods, lag_features
+from sensor_analysis.task1_analysis import periods, lag_features
 
 
 def test_event_duration_includes_last_sample():
@@ -16,3 +16,4 @@ def test_lag_features_never_read_future():
     values.iloc[20:] = 999
     changed = lag_features(values)
     pd.testing.assert_frame_equal(original.iloc[:20], changed.iloc[:20])
+

@@ -2,9 +2,12 @@
 import argparse
 import hashlib
 import json
+import os
 import re
 from pathlib import Path
 import numpy as np
+
+os.environ.setdefault('HF_HOME', str(Path(__file__).resolve().parents[2] / '.cache' / 'huggingface'))
 
 EMBEDDING='sentence-transformers/all-MiniLM-L6-v2'
 GENERATOR='google/flan-t5-small'
@@ -97,10 +100,11 @@ class RAG:
 
 
 def main():
-    parser=argparse.ArgumentParser(); parser.add_argument('--docs',default='docs/source-pdfs'); parser.add_argument('--index-dir',default='Task2/prototype/index'); parser.add_argument('--question'); parser.add_argument('--rebuild',action='store_true')
+    parser=argparse.ArgumentParser(); parser.add_argument('--docs',default='docs/source-pdfs'); parser.add_argument('--index-dir',default='document_qa/prototype/index'); parser.add_argument('--question'); parser.add_argument('--rebuild',action='store_true')
     args=parser.parse_args()
     if args.rebuild or not (Path(args.index_dir)/'vectors.faiss').exists(): print(f'Indexed {build_index(args.docs,args.index_dir)} chunks')
     if args.question: print(json.dumps(RAG(args.index_dir).answer(args.question),indent=2,ensure_ascii=False))
 
 
 if __name__=='__main__': main()
+

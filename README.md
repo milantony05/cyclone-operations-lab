@@ -1,65 +1,78 @@
 # Cyclone Operations Lab
 
-**A reproducible sensor analysis and cited technical-document Q&A demo.** Milan Tony's data science take-home submission combines an executable notebook, a Python analysis pipeline, an interactive dashboard, a local open-model RAG prototype, and an eight-slide presentation.
+I built this project to explore cyclone sensor behavior and answer questions from cyclone technical manuals with page citations. It includes a reproducible time-series analysis, a local retrieval and generation prototype, two executed notebooks, and an interactive dashboard.
 
-![2018 cyclone sensor history with inferred downtime](Task1/plots/full_year.png)
+![Cyclone temperatures and drafts across 2018, with shutdown candidates highlighted](sensor_analysis/plots/full_year.png)
 
-## Start here
+## What I found
 
-| Goal | Open or run |
+| Measure | Result | Interpretation |
+| --- | ---: | --- |
+| Sensor observations | 377,719 | January 2017 through August 2020 |
+| Missing five-minute timestamps | 861 | Kept missing rather than filled |
+| Shutdown candidates | 77 events, 5,156.4 hours | Rule-based proxy requiring operator validation |
+| Active operating states | 6 clusters | Descriptive sensor regimes |
+| Anomaly candidates | 926 events | State-relative robust deviations |
+| One-hour forecast RMSE | 19.48 | Gradient boosting; persistence: 22.68 |
+| Searchable PDF chunks | 382 | Extracted from 11 supplied PDFs |
+
+Sensor units are not documented in the source workbook, so forecast errors use native sensor units. I treat shutdowns and root causes as hypotheses because operator and maintenance labels were not supplied.
+
+## Explore the project
+
+| Area | Where to start |
 | --- | --- |
-| Explore sensor analysis | `notebooks/task1_analysis.ipynb` |
-| Explore PDF retrieval and answers | `notebooks/task2_rag.ipynb` |
-| Launch the visual demo | `streamlit run dashboard/app.py` |
-| Rebuild sensor outputs | `python Task1/task1_analysis.py` then `python -m Task1.enrich_report` |
-| Index the supplied manuals | `python Task2/prototype/rag_prototype.py --rebuild` |
-| Ask a cited question | `python Task2/prototype/rag_prototype.py --question "How often does Linatex recommend internal cyclone inspections?"` |
-| View the submission story | `presentations/Final_Presentation.pptx` |
+| Sensor analysis | [Executed notebook](notebooks/sensor_analysis.ipynb), [methods and outputs](sensor_analysis/README.md) |
+| Document Q&A | [Executed notebook](notebooks/document_qa.ipynb), [prototype instructions](document_qa/prototype/README.md), [design notes](document_qa/notes.md) |
+| Interactive demo | [Dashboard source](dashboard/app.py) |
+| Presentation | [Final deck](reports/Final_Presentation.pptx) and [architecture diagram](document_qa/architecture_diagram.pptx) |
+| Verification | [Report](reports/TEST_REPORT.md) |
 
-## Repository map
+The original workbook, assignment brief, and eleven PDFs are in `docs/`. Derived CSVs and plots live beside the relevant analysis code. The `dist/` folder holds the final submission ZIP when built.
 
-```text
-docs/                     Assignment brief, original workbook, 11 source PDFs
-notebooks/                Executed Task 1 and Task 2 notebooks
-dashboard/                Streamlit visual explorer and document Q&A demo
-Task1/                    Analysis code, audit, CSVs, case notes, plots
-Task2/                    RAG design, prototype, evaluation, diagram
-tests/                    Deterministic data and retrieval checks
-presentations/            Eight-slide final presentation
-reports/                  Verification report
-package_submission.py     Builds the submission ZIP
-```
+## Set up locally
 
-Original inputs are versioned in `docs/`. The FAISS index, model weights, virtual environment, and generated ZIP can be rebuilt locally.
-
-## Setup
-
-Use Python 3.12. In PowerShell:
+Use Python 3.12. The commands below run from the repository root in PowerShell:
 
 ```powershell
 py -3.12 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
-python Task1/task1_analysis.py
-python -m Task1.enrich_report
-python Task2/prototype/rag_prototype.py --rebuild
-streamlit run dashboard/app.py
+python sensor_analysis/task1_analysis.py
+python -m sensor_analysis.enrich_report
+python document_qa/prototype/rag_prototype.py --rebuild
+python scripts/run_dashboard.py
 ```
 
-On macOS/Linux, create the environment with `python3.12 -m venv .venv` and activate with `source .venv/bin/activate`. The first RAG run downloads `sentence-transformers/all-MiniLM-L6-v2` and `google/flan-t5-small`; subsequent runs use the cache. `requirements-lock.txt` records the tested Windows environment.
+On macOS or Linux, create the environment with `python3.12 -m venv .venv` and activate it with `source .venv/bin/activate`. The first index build downloads the open models `sentence-transformers/all-MiniLM-L6-v2` and `google/flan-t5-small`; later runs reuse the local cache. The dashboard launcher starts Streamlit from `dashboard/`, so `dashboard/.streamlit/config.toml` supplies its theme.
 
-Open either notebook from the repository root with `jupyter lab notebooks/task1_analysis.ipynb` or `jupyter lab notebooks/task2_rag.ipynb`. The Task 1 script performs full model fitting so its notebook stays responsive during review. The Task 2 notebook walks through PDF ingestion, retrieval, citations, and the smoke evaluation. The dashboard reads the same results and queries the local PDF index.
+Open the notebooks from the repository root with:
 
-## Results
+```powershell
+jupyter lab notebooks/sensor_analysis.ipynb
+jupyter lab notebooks/document_qa.ipynb
+```
 
-The workbook has **377,719 observations** from January 2017 through August 2020. Reindexing exposed **861 missing timestamps**. Error strings are counted separately from downtime. A conservative temperature and draft rule identified **77 shutdown-proxy events totaling 5,156.4 hours**. Six active-operation clusters and 926 state-relative anomaly candidates support investigation, not confirmed fault diagnosis.
+The notebooks contain executed outputs for quick review. The sensor script performs full clustering, anomaly detection, plotting, and forecast fitting. The Task 2 notebook inspects PDF ingestion, chunk lengths, hybrid retrieval, a cited answer, and the small evaluation. Rebuild the FAISS index before running the Task 2 notebook on a fresh checkout.
 
-For a one-hour forecast on a chronological held-out test, gradient boosting reached **RMSE 19.48** and **MAE 10.90**, versus persistence RMSE 22.68 and MAE 12.48, in native sensor units. `Task1/README.md` details the methods and limitations.
+## Method and output guide
 
-The RAG prototype extracted **382 chunks from 11 PDFs**. It combines MiniLM embeddings, local FAISS search, BM25 and rank fusion, then prompts FLAN-T5-small. Responses expose document names, pages, and excerpts. `Task2/notes.md` covers guardrails, scaling, and evaluation limits.
+**Sensor data.** I parse timestamps and numeric readings, retain communication-error counts, and reindex onto a strict five-minute grid. I do not fill missing sensor values. A shutdown candidate requires both gas temperatures below 150 and absolute inlet draft below 30 for at least 30 consecutive minutes. Complete active rows enter MiniBatch KMeans; a sampled silhouette score chooses among 3–6 states. Within each state, robust MAD-based sensor deviations produce anomaly candidates. Twelve direct gradient-boosting models forecast inlet gas temperature 5–60 minutes ahead on a chronological train, validation, and test split. Required CSVs and PNGs are under `sensor_analysis/`.
 
-## Verification and submission
+**Document Q&A.** The prototype extracts PDF text with page provenance, makes overlapping 150-word chunks, combines MiniLM/FAISS dense retrieval with BM25, and fuses rankings. FLAN-T5-small generates an answer from retrieved excerpts. The response includes source document and page references. Low-relevance questions abstain. The index under `document_qa/prototype/index/` and downloaded model files are local build artifacts.
 
-Run `python -m pytest -q` and `python Task2/prototype/evaluate.py`. See [the verification report](reports/TEST_REPORT.md) for measured results. Run `python package_submission.py` to create `dist/Milan_Tony_DataScience.zip` with original inputs and required deliverables. The ZIP places `Final_Presentation.pptx` at its top level as requested by the assignment.
+## Check and package
 
-**Interpretation boundary:** no operator labels or maintenance logs were provided. Shutdowns are rule-based proxies; root causes are hypotheses. Retrieved citations show evidence locations, while answer faithfulness still requires review.
+```powershell
+python -m pytest -q
+python document_qa/prototype/evaluate.py
+python scripts/package_submission.py
+```
+
+The package script writes `dist/Milan_Tony_DataScience.zip`. The ZIP keeps the working project layout and includes copies under the assignment's required `Task1/` and `Task2/` names. It also places `Final_Presentation.pptx` at the ZIP top level. The script verifies the archive and required deliverables. The test report records the executed checks and their limits.
+
+## Limits and next steps
+
+The shutdown rule has no ground-truth labels. Cluster names summarize sensor patterns rather than verified machine conditions. Anomaly explanations need maintenance logs and operator review. The four-question RAG evaluation is a smoke test, and page citations do not prove every generated claim. Before operational deployment, I would validate event labels, evaluate forecasts around shutdown transitions, expand the document question set, and measure answer faithfulness with human review.
+
+`.gitattributes` keeps PDFs, spreadsheets, slides, images, and compressed labels as binary Git objects and normalizes Python and Markdown line endings. `requirements.txt` is the single dependency list; the local virtual environment and model cache are excluded from Git.

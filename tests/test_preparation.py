@@ -1,5 +1,5 @@
 import pandas as pd
-from Task1.task1_analysis import prepare, periods
+from sensor_analysis.task1_analysis import prepare, periods
 
 
 def test_missing_grid_and_duplicate_median():
@@ -13,3 +13,4 @@ def test_missing_grid_and_duplicate_median():
 def test_missing_breaks_event():
     mask=pd.Series([True,None,True],index=pd.date_range('2020',periods=3,freq='5min'))
     assert periods(mask).duration_minutes.tolist()==[5,5]
+
