@@ -1,0 +1,12 @@
+numpy
+pandas
+openpyxl
+scikit-learn
+matplotlib
+pytest
+pypdf
+faiss-cpu
+sentence-transformers
+transformers
+sentencepiece
+rank-bm25
