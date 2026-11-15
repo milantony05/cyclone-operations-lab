@@ -4,8 +4,8 @@
 
 - Task 1 processed 377,719 sensor rows and produced all 12 forecast horizons, required CSVs, and PNG plots.
 - Task 2 extracted 382 chunks from 11 source PDFs and loaded the local embedding and generation models.
-- `notebooks/1_sensor_analysis.ipynb` executed 8 code cells with zero errors. It recalculates the documented shutdown event count and summarizes anomaly rates by state.
-- `notebooks/2_document_qa.ipynb` executed 6 code cells with zero errors. It shows extraction provenance, chunk distribution, hybrid retrieval, a cited answer, and evaluation results.
+- `1_sensor_analysis/1_sensor_analysis.ipynb` executed 7 code cells with zero errors. It recalculates the documented shutdown event count and summarizes anomaly rates by state.
+- `2_document_qa/2_document_qa.ipynb` executed 6 code cells with zero errors. It shows extraction provenance, chunk distribution, hybrid retrieval, a cited answer, and evaluation results.
 - The Streamlit dashboard rendered seven tabs without exceptions; its live health endpoint responded, and the overview and forecast views were inspected in the browser. A full-width overview screenshot is saved at `dashboard/screenshots/overview.png` and embedded in the root README.
 - The eight-slide final presentation and Task 2 architecture slide passed bundled structural, layout, font, and reimport checks after visual review.
 

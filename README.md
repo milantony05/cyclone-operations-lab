@@ -22,11 +22,11 @@ Sensor units are not documented in the source workbook, so forecast errors use n
 
 | Area | Where to start |
 | --- | --- |
-| Sensor analysis | [Executed notebook](notebooks/1_sensor_analysis.ipynb), [methods and outputs](1_sensor_analysis/README.md) |
-| Document Q&A | [Executed notebook](notebooks/2_document_qa.ipynb), [prototype instructions](2_document_qa/prototype/README.md), [design notes](2_document_qa/notes.md) |
+| Sensor analysis | [Executed notebook](1_sensor_analysis/1_sensor_analysis.ipynb), [methods and outputs](1_sensor_analysis/README.md) |
+| Document Q&A | [Executed notebook](2_document_qa/2_document_qa.ipynb), [prototype instructions](2_document_qa/prototype/README.md), [design notes](2_document_qa/notes.md) |
 | Interactive demo | [Dashboard source](dashboard/app.py) |
-| Presentation | [Final deck](reports/Final_Presentation.pptx) and [architecture diagram](2_document_qa/architecture_diagram.pptx) |
-| Verification | [Report](reports/TEST_REPORT.md) |
+| Presentation | [Final deck](docs/Final_Presentation.pptx) and [architecture diagram](2_document_qa/architecture_diagram.pptx) |
+| Verification | [Report](docs/TEST_REPORT.md) |
 
 The original workbook, assignment brief, and eleven PDFs are in `docs/`. Derived CSVs and plots live beside the relevant analysis code. The final submission ZIP is generated at the repository root.
 
@@ -49,8 +49,8 @@ On macOS or Linux, create the environment with `python3.12 -m venv .venv` and ac
 Open the notebooks from the repository root with:
 
 ```powershell
-jupyter lab notebooks/1_sensor_analysis.ipynb
-jupyter lab notebooks/2_document_qa.ipynb
+jupyter lab 1_sensor_analysis/1_sensor_analysis.ipynb
+jupyter lab 2_document_qa/2_document_qa.ipynb
 ```
 
 The notebooks contain executed outputs for quick review. The sensor script performs full clustering, anomaly detection, plotting, and forecast fitting. The Task 2 notebook inspects PDF ingestion, chunk lengths, hybrid retrieval, a cited answer, and the small evaluation. Rebuild the FAISS index before running the Task 2 notebook on a fresh checkout.

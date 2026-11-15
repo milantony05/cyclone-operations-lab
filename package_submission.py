@@ -7,7 +7,7 @@ DESTINATION = ROOT / "Milan_Tony_DataScience.zip"
 DESTINATION.parent.mkdir(exist_ok=True)
 
 files = [ROOT / name for name in ("README.md", "requirements.txt", "package_submission.py")]
-for folder in ("1_sensor_analysis", "2_document_qa", "notebooks", "dashboard", "docs", "reports", "tests"):
+for folder in ("1_sensor_analysis", "2_document_qa", "dashboard", "docs", "tests"):
     files.extend(
         path for path in (ROOT / folder).rglob("*")
         if path.is_file()
@@ -23,7 +23,7 @@ with ZipFile(DESTINATION, "w", ZIP_DEFLATED, compresslevel=6) as archive:
             archive.write(path, Path("Milan_Tony_DataScience", "Task1", *relative.parts[1:]))
         elif relative.parts[0] == "2_document_qa":
             archive.write(path, Path("Milan_Tony_DataScience", "Task2", *relative.parts[1:]))
-        elif relative == Path("reports/Final_Presentation.pptx"):
+        elif relative == Path("docs/Final_Presentation.pptx"):
             archive.write(path, Path("Milan_Tony_DataScience", "Final_Presentation.pptx"))
 
 with ZipFile(DESTINATION) as archive:
@@ -38,8 +38,8 @@ with ZipFile(DESTINATION) as archive:
         "Task1/forecasts.csv",
         "Task2/architecture_diagram.pptx",
         "Task2/prototype/rag_prototype.py",
-        "notebooks/1_sensor_analysis.ipynb",
-        "notebooks/2_document_qa.ipynb",
+        "1_sensor_analysis/1_sensor_analysis.ipynb",
+        "2_document_qa/2_document_qa.ipynb",
         "dashboard/app.py",
         "dashboard/.streamlit/config.toml",
         "docs/data.xlsx",
