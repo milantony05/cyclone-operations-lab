@@ -18,12 +18,13 @@ for folder in ("1_sensor_analysis", "2_document_qa", "dashboard", "docs", "tests
 with ZipFile(DESTINATION, "w", ZIP_DEFLATED, compresslevel=6) as archive:
     for path in files:
         relative = path.relative_to(ROOT)
-        archive.write(path, Path("Milan_Tony_DataScience") / relative)
         if relative.parts[0] == "1_sensor_analysis":
             archive.write(path, Path("Milan_Tony_DataScience", "Task1", *relative.parts[1:]))
         elif relative.parts[0] == "2_document_qa":
             archive.write(path, Path("Milan_Tony_DataScience", "Task2", *relative.parts[1:]))
-        elif relative == Path("docs/Final_Presentation.pptx"):
+        else:
+            archive.write(path, Path("Milan_Tony_DataScience") / relative)
+        if relative == Path("docs/Final_Presentation.pptx"):
             archive.write(path, Path("Milan_Tony_DataScience", "Final_Presentation.pptx"))
 
 with ZipFile(DESTINATION) as archive:
@@ -38,13 +39,14 @@ with ZipFile(DESTINATION) as archive:
         "Task1/forecasts.csv",
         "Task2/architecture_diagram.pptx",
         "Task2/prototype/rag_prototype.py",
-        "1_sensor_analysis/1_sensor_analysis.ipynb",
-        "2_document_qa/2_document_qa.ipynb",
+        "Task1/1_sensor_analysis.ipynb",
+        "Task2/2_document_qa.ipynb",
         "dashboard/app.py",
         "dashboard/.streamlit/config.toml",
         "docs/data.xlsx",
     )
     assert all(f"Milan_Tony_DataScience/{name}" in names for name in required)
+    assert not any(name.startswith("Milan_Tony_DataScience/1_sensor_analysis/") or name.startswith("Milan_Tony_DataScience/2_document_qa/") for name in names)
 
 print(f"Verified {DESTINATION}: {len(files)} files, {DESTINATION.stat().st_size:,} bytes")
 

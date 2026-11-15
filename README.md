@@ -73,7 +73,7 @@ python 2_document_qa/prototype/evaluate.py
 python package_submission.py
 ```
 
-The package script writes `Milan_Tony_DataScience.zip`. The ZIP keeps the working project layout and includes copies under the assignment's required `Task1/` and `Task2/` names. It also places `Final_Presentation.pptx` at the ZIP top level. The script verifies the archive and required deliverables. The test report records the executed checks and their limits.
+The package script writes `Milan_Tony_DataScience.zip`. The ZIP uses the assignment's required `Task1/` and `Task2/` names for the two analysis folders, with no duplicate copies under the repository folder names. It also places `Final_Presentation.pptx` at the ZIP top level. The script verifies the archive and required deliverables. The test report records the executed checks and their limits.
 
 ## Limits and next steps
 
