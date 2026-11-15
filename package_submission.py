@@ -5,11 +5,8 @@ from zipfile import ZipFile, ZIP_DEFLATED
 root=Path(__file__).resolve().parent
 archive=root/'Milan_Tony_DataScience.zip'
 files=[root/n for n in ['README.md','TEST_REPORT.md','requirements.txt','requirements-lock.txt','Final_Presentation.pptx','package_submission.py']]
-for folder in ['Task1','Task2','tests']:
+for folder in ['Task1','Task2','tests','notebooks','dashboard','docs']:
     files.extend(p for p in (root/folder).rglob('*') if p.is_file() and not any(part in {'__pycache__','index','.pytest_cache'} for part in p.parts) and not p.name.endswith('.inspect.ndjson'))
-# Include original inputs in the private submission archive, not in GitHub.
-files.append(root/'data.xlsx')
-files.extend((root/'Task 2 Doc').glob('*.pdf'))
 with ZipFile(archive,'w',ZIP_DEFLATED,compresslevel=6) as z:
     for p in files:z.write(p,Path('Milan_Tony_DataScience')/p.relative_to(root))
 with ZipFile(archive) as z:

@@ -2,11 +2,10 @@
 __pycache__/
 .pytest_cache/
 *.pyc
-data.xlsx
-Task 2 Doc/
-*.docx
 .cache/
 .build/
 *.inspect.ndjson
 *.zip
 Task2/prototype/index/
+.ipynb_checkpoints/
+notebooks/.executed/

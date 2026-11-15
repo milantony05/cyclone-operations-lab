@@ -10,3 +10,8 @@ sentence-transformers
 transformers
 sentencepiece
 rank-bm25
+streamlit
+plotly
+nbformat
+nbclient
+ipykernel

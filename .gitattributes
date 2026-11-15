@@ -2,5 +2,7 @@
 *.pptx binary
 *.png binary
 *.gz binary
+*.xlsx binary
+*.docx binary
 *.py text eol=lf
 *.md text eol=lf

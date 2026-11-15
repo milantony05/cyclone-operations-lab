@@ -97,7 +97,7 @@ class RAG:
 
 
 def main():
-    parser=argparse.ArgumentParser(); parser.add_argument('--docs',default='Task 2 Doc'); parser.add_argument('--index-dir',default='Task2/prototype/index'); parser.add_argument('--question'); parser.add_argument('--rebuild',action='store_true')
+    parser=argparse.ArgumentParser(); parser.add_argument('--docs',default='docs/source-pdfs'); parser.add_argument('--index-dir',default='Task2/prototype/index'); parser.add_argument('--question'); parser.add_argument('--rebuild',action='store_true')
     args=parser.parse_args()
     if args.rebuild or not (Path(args.index_dir)/'vectors.faiss').exists(): print(f'Indexed {build_index(args.docs,args.index_dir)} chunks')
     if args.question: print(json.dumps(RAG(args.index_dir).answer(args.question),indent=2,ensure_ascii=False))

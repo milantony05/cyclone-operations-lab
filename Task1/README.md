@@ -1,6 +1,6 @@
 # Machine data analysis
 
-From the repository root, run `python Task1/task1_analysis.py --data data.xlsx`.
+From the repository root, run `python Task1/task1_analysis.py --data docs/source-data/data.xlsx`.
 Install the root requirements first. The run produces all CSVs and plots locally.
 Run `python -m Task1.enrich_report` afterward to reproduce the detailed before/during anomaly comparisons and readable state names in the submitted report.
 

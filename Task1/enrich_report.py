@@ -4,7 +4,7 @@ import pandas as pd
 from Task1.task1_analysis import prepare
 
 def main():
-    out=Path('Task1'); data,_=prepare(pd.read_excel('data.xlsx'))
+    out=Path('Task1'); data,_=prepare(pd.read_excel('docs/source-data/data.xlsx'))
     labels=pd.read_csv(out/'sample_labels.csv.gz',index_col=0,parse_dates=True)
     events=pd.read_csv(out/'anomalous_periods.csv',parse_dates=['start','end']).sort_values('peak_score',ascending=False)
     chosen=[]; notes=['# Selected anomaly investigations\n\nComparisons use the 30 minutes before each event and the event median. These are hypotheses, not causal diagnoses.\n']
