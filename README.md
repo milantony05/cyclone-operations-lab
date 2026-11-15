@@ -30,6 +30,10 @@ Sensor units are not documented in the source workbook, so forecast errors use n
 
 The original workbook, assignment brief, and eleven PDFs are in `docs/`. Derived CSVs and plots live beside the relevant analysis code. The final submission ZIP is generated at the repository root.
 
+## Hosted dashboard
+
+The Streamlit Community Cloud entry point is `dashboard/app.py` on the `main` branch. `dashboard/requirements.txt` installs only the dashboard's display dependencies; the root `requirements.txt` remains the full local analysis environment. The hosted Document Q&A tab shows a recorded cited answer because the local FAISS index and language models are excluded from Git. To ask new questions, build the index locally and run `python dashboard/run_dashboard.py`.
+
 ## Set up locally
 
 Use Python 3.12. The commands below run from the repository root in PowerShell:

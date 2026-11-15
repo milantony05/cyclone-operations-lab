@@ -83,13 +83,21 @@ def main():
         st.caption('The line chart shows the first 200 held-out predictions at the selected horizon. Forecast origins overlap.')
     with pages[5]:
         st.subheader('Ask the supplied manuals')
-        st.caption('First run the indexing command in the README. The local FLAN-T5 model may take time on CPU.')
-        question=st.text_input('Question',value='How often does Linatex recommend internal cyclone inspections?')
-        if st.button('Search and answer',type='primary'):
-            from importlib import import_module; RAG = import_module("2_document_qa.prototype.rag_prototype").RAG
-            index=ROOT/'2_document_qa/prototype/index'
-            if not (index/'vectors.faiss').exists():st.error('Index missing. Run: python 2_document_qa/prototype/rag_prototype.py --rebuild')
-            else:
+        index=ROOT/'2_document_qa/prototype/index'
+        if not (index/'vectors.faiss').exists():
+            st.info('Live local inference is available after building the index locally. This hosted demo shows a recorded, cited example from the supplied manuals.')
+            example=json.loads((ROOT/'2_document_qa/example_answers.json').read_text(encoding='utf-8'))[0]
+            st.markdown(f"**Question:** {example['question']}")
+            st.write(example['answer'])
+            for source in example['sources']:
+                with st.expander(f"{source['document']}, page {source['page']}"):
+                    st.write(source['text'])
+        else:
+            st.caption('The local FLAN-T5 model may take time on CPU.')
+            question=st.text_input('Question',value='How often does Linatex recommend internal cyclone inspections?')
+            if st.button('Search and answer',type='primary'):
+                from importlib import import_module
+                RAG = import_module("2_document_qa.prototype.rag_prototype").RAG
                 with st.spinner('Retrieving evidence and generating a cited answer...'):
                     response=RAG(index).answer(question)
                 st.write(response['answer']);st.caption(f"Status: {response['status']}")
