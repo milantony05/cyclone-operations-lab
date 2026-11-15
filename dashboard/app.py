@@ -16,6 +16,7 @@ st.markdown('''<style>
 .block-container{padding-top:2rem;max-width:1500px}
 h1,h2,h3{font-family:Arial,sans-serif;color:#173f59}
 div[data-testid="stMetric"]{background:#eef5f8;border:1px solid #d6e5ec;border-radius:14px;padding:18px}
+div[data-testid="stMetric"] *{color:#173f59!important}
 </style>''', unsafe_allow_html=True)
 
 @st.cache_data
@@ -38,33 +39,33 @@ def main():
         a,b,c,d=st.columns(4)
         a.metric('Sensor observations','377,719');b.metric('Shutdown proxy events',f"{result['shutdown_events']:,}")
         c.metric('Detected downtime',f"{result['downtime_hours']:,.0f} h");d.metric('Anomaly candidates',f"{result['anomaly_events']:,}")
-        st.image(str(TASK/'plots/full_year.png'),caption='2018 sensor traces. Red areas satisfy the shutdown proxy.',use_container_width=True)
+        st.image(str(TASK/'plots/full_year.png'),caption='2018 sensor traces. Red areas satisfy the shutdown proxy.',width="stretch")
         st.info('Coverage: January 2017 to August 2020. Missing telemetry is tracked separately from shutdowns.')
     with pages[1]:
         st.subheader('Shutdown event explorer')
         year=st.selectbox('Year',[2017,2018,2019,2020],index=1)
         filtered=shutdown[shutdown.start.dt.year==year]
         st.write(f'{len(filtered)} events, {filtered.duration_minutes.sum()/60:,.1f} hours in {year}')
-        st.dataframe(filtered.sort_values('duration_minutes',ascending=False),use_container_width=True,hide_index=True)
+        st.dataframe(filtered.sort_values('duration_minutes',ascending=False),width="stretch",hide_index=True)
         st.caption('Event end is exclusive. Both gas temperatures must be below 150 and absolute inlet draft below 30 for at least 30 minutes.')
     with pages[2]:
         st.subheader('Measured state profiles')
         cols=['state','state_name','samples','frequency_fraction','episodes','median_duration_minutes','Cyclone_Inlet_Gas_Temp_median','Cyclone_Inlet_Draft_median']
-        st.dataframe(clusters[cols],use_container_width=True,hide_index=True)
+        st.dataframe(clusters[cols],width="stretch",hide_index=True)
         fig=go.Figure(go.Bar(x=clusters['state_name'],y=clusters['frequency_fraction']*100,marker_color='#197da1'))
         fig.update_layout(yaxis_title='Share of complete active samples (%)',xaxis_title='',height=440)
-        st.plotly_chart(fig,use_container_width=True)
+        st.plotly_chart(fig,width="stretch")
         st.caption('Names summarize observed profiles. They are not validated fault or efficiency classifications.')
     with pages[3]:
         st.subheader('Contextual anomaly events')
         available=sorted(anomalies.state.dropna().astype(int).unique())
         chosen=st.multiselect('States',available,default=available)
         filtered=anomalies[anomalies.state.isin(chosen)].sort_values('peak_score',ascending=False)
-        st.dataframe(filtered.head(100),use_container_width=True,hide_index=True)
+        st.dataframe(filtered.head(100),width="stretch",hide_index=True)
         pictures=list(sorted((TASK/'plots').glob('anomaly_*.png')))
         if pictures:
             pick=st.selectbox('Annotated case',[p.name for p in pictures])
-            st.image(str(TASK/'plots'/pick),use_container_width=True)
+            st.image(str(TASK/'plots'/pick),width="stretch")
         with st.expander('Measured case notes'):
             st.markdown((TASK/'anomaly_cases.md').read_text(encoding='utf-8'))
     with pages[4]:
@@ -74,8 +75,8 @@ def main():
         for method,group in chart.groupby('method'):
             fig.add_trace(go.Scatter(x=group.horizon_steps*5,y=group.RMSE,mode='lines+markers',name=method))
         fig.update_layout(xaxis_title='Forecast horizon (minutes)',yaxis_title='RMSE (native temperature units)',height=440)
-        st.plotly_chart(fig,use_container_width=True)
-        overall=metrics[metrics.horizon_steps=='overall'];st.dataframe(overall,use_container_width=True,hide_index=True)
+        st.plotly_chart(fig,width="stretch")
+        overall=metrics[metrics.horizon_steps=='overall'];st.dataframe(overall,width="stretch",hide_index=True)
         horizon=st.slider('Inspect horizon (minutes)',5,60,60,5)
         view=forecasts[forecasts.horizon_steps==horizon//5].head(200)
         st.line_chart(view.set_index('target_time')[['actual','persistence','gradient_boosting']])
@@ -101,3 +102,4 @@ def main():
         st.markdown((ROOT/'Task2/notes.md').read_text(encoding='utf-8'))
 
 if __name__=='__main__':main()
+
